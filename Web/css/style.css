@@ -1,0 +1,36 @@
+.cust-navbar {
+	height: 3rem;
+}
+
+.main-panel {
+	height: calc(100vh - 3rem);
+}
+
+.header-row {
+	height: 3.75rem;
+}
+
+.main-row {
+	height: calc(100% - 3.75rem);
+}
+
+
+
+.node {
+	position: absolute; 
+	overflow:hidden; 
+	top:100px; 
+	left:100px;
+	cursor: pointer;
+}
+
+.node.selected {
+	border: 2px solid lightskyblue;
+}
+
+.node-heuristic {
+	position: absolute;
+	left: -1rem;
+	top: -1rem;
+	font-style: italic;
+}
