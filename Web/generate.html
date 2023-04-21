@@ -1,5 +1,3 @@
-
-
 <html lang="en">
 
 <head>
@@ -18,8 +16,8 @@
 </head>
 
 <body class="bg-dark">
-	<svg id="connector_holder" height="100%" width="100%" style="position: absolute; overflow:hidden; z-index: -1;">
-		<g id="connector_group" class="d-none">
+	<svg id="link_holder" height="100%" width="100%" style="position: absolute; overflow:hidden; z-index: -1;">
+		<g id="link_group" class="d-none">
 			<line x1="100" y1="100" x2="200" y2="200" stroke="white" stroke-width="3" />
 			<text x="100" y="100" font-size="1.25em" fill="red" style="font-weight: bold; font-style: itallic;"></text>
 		</g>
@@ -43,7 +41,7 @@
 
 	<div class="container-fluid main-panel">
 		<div class="row h-100 p-2">
-			<div class="col-lg-8 col-xl-8 h-100 p-2">
+			<div class="col-lg-9 col-xl-9 h-100 p-2">
 				<div class="h-100 border rounded">
 					<div class="container-fluid h-100">
 						<div class="row heading-row">
@@ -64,7 +62,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4 col-xl-4 h-100 p-2">
+			<div class="col-lg-3 col-xl-3 h-100 p-2">
 				<div class="h-100 border rounded">
 					<div class="container-fluid h-100">
 						<div class="row heading-row">
@@ -75,7 +73,7 @@
 						</div>
 						<div class="row main-row overflow-auto">
 							<div class="col-12">
-								<div class="row border rounded pt-2 pb-2 mb-3">
+								<!-- <div class="row border rounded pt-2 pb-2 mb-3">
 									<div class="col-12">
 										<h6 class="text-white">Add Node</h6>
 										<hr class="bg-light" />
@@ -105,40 +103,29 @@
 										<button type="button" class="btn btn-secondary" onclick="addNode();">Add
 											Node</button>
 									</div>
-								</div>
+								</div> -->
 
-								<div id="node_utilities_row" class="row border rounded pt-2 pb-2 mb-3 d-none">
+								<div id="node_util_div" class="row border rounded pt-2 pb-2 mb-3 d-none">
 									<div class="col-12">
 										<h6 class="text-white">Node Utilities</h6>
 										<hr class="bg-light" />
 									</div>
 									<div class="col-12">
-										<p id="sel_node_text" class="text-light font-2">Selected Node: </p>
+										<p class="text-light font-2 mb-0">Selected Node(s): </p>
+										<p id="sel_node_text" class="text-info font-2">-</p>
 									</div>
-									<div class="col-12">
-										<button type="button" class="btn btn-secondary" onclick="changePos();">Change
-											Position</button>
-									</div>
-									<div class="col-12">
-										<p id="click_anywhere_text" class="text-light d-none">Click anywhere inside Draw
-											Board to move Node</p>
-									</div>
-									<div class="col-12 mt-4">
+									<div id="link_node_div" class="col-12 d-none">
 										<div class="input-group">
-											<span class="input-group-text bg-secondary text-light">Cost</span>
-											<input type="number" class="form-control bg-dark text-light"
-												id="node_neighbour_cost" name="node_neighbour_cost">
-											<button class="btn btn-outline-light" type="button"
-												onclick="addNeighbor();">Add Neighbor</button>
+											<span class="input-group-text bg-secondary text-light">Link Cost</span>
+											<input type="number" class="form-control bg-dark text-light" id="node_link_cost" name="node_link_cost">
+											<button class="btn btn-outline-light" type="button" onclick="linkNodes();">Link</button>
 										</div>
 									</div>
 									<div class="col-12">
-										<p id="click_any_node_text" class="text-light d-none">Click any node to connect
-										</p>
+										<p id="sel_info_text" class="text-light d-none">Select exactly 2 nodes to link</p>
 									</div>
-									<div class="col-12 mt-4">
-										<button class="btn btn-danger" type="button"
-											onclick="console.log('Not Implemented');">Delete Node</button>
+									<div class="col-12">
+										<button id="delete_node_btn" class="btn btn-danger" type="button" onclick="deleteNode();">Delete Node</button>
 									</div>
 								</div>
 
@@ -161,7 +148,7 @@
 	</div>
 
 	<div class="modal fade" id="add_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-			aria-labelledby="add_modal_label" aria-hidden="true">
+		aria-labelledby="add_modal_label" aria-hidden="true">
 		<div class="modal-dialog modal-sm modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -171,7 +158,8 @@
 				<div class="modal-body">
 					<div class="mb-3">
 						<label for="add_node_name_input" class="form-label">Node Name</label>
-						<input type="text" class="form-control" id="add_node_name_input" maxlength="2" oninput="this.value = this.value.toUpperCase()">
+						<input type="text" class="form-control" id="add_node_name_input" maxlength="2"
+							oninput="this.value = this.value.toUpperCase()">
 					</div>
 
 					<div class="mb-3">
