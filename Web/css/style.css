@@ -14,14 +14,67 @@
 	height: calc(100% - 3.75rem);
 }
 
-
-
 .node {
 	position: absolute; 
 	overflow:hidden; 
 	top:100px; 
 	left:100px;
 	cursor: pointer;
+}
+
+.node-normal {
+	stroke-dasharray: 0;
+	stroke-dashoffset: 0;
+}
+
+.node-normal > circle {
+	stroke-width: 3;
+	stroke: white;
+}
+
+.node-animated {
+	stroke-dasharray: 10;
+
+	animation: 0.5s infinite linear alternate-reverse knode;
+}
+
+.node-animated > circle {
+	stroke-width: 5;
+	stroke: red;
+}
+
+@keyframes knode {
+	0%{
+		stroke-dashoffset: 10;
+	}
+
+	100%{
+		stroke-dashoffset: 0;
+	}
+}
+
+.link-normal > line {
+	stroke-width: 3;
+	stroke: white;
+}
+
+.link-animated {
+	animation: 0.5s infinite linear alternate klink;
+}
+
+.link-animated > line{
+	stroke-width: 5;
+	stroke: red;
+}
+
+@keyframes klink {
+	0% {
+		stroke-opacity: 0;
+	}
+
+	100% {
+		stroke-opacity: 1;
+	}
 }
 
 .node.selected {

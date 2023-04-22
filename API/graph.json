@@ -1,0 +1,203 @@
+[
+    {
+        "id": "node_0",
+        "name": "0",
+        "heuristicValue": null,
+        "neighbors": [
+            {
+                "id": "node_1",
+                "cost": null,
+                "linkId": "link_group_node_0_node_1"
+            },
+            {
+                "id": "node_3",
+                "cost": null,
+                "linkId": "link_group_node_0_node_3"
+            }
+        ],
+        "position": {
+            "top": 162,
+            "left": 183
+        },
+        "width": 50,
+        "height": 70
+    },
+    {
+        "id": "node_1",
+        "name": "1",
+        "heuristicValue": null,
+        "neighbors": [
+            {
+                "id": "node_0",
+                "cost": null,
+                "linkId": "link_group_node_0_node_1"
+            },
+            {
+                "id": "node_2",
+                "cost": null,
+                "linkId": "link_group_node_1_node_2"
+            },
+            {
+                "id": "node_3",
+                "cost": null,
+                "linkId": "link_group_node_3_node_1"
+            },
+            {
+                "id": "node_6",
+                "cost": null,
+                "linkId": "link_group_node_1_node_6"
+            },
+            {
+                "id": "node_5",
+                "cost": null,
+                "linkId": "link_group_node_1_node_5"
+            }
+        ],
+        "position": {
+            "top": 163,
+            "left": 515
+        },
+        "width": 50,
+        "height": 70
+    },
+    {
+        "id": "node_2",
+        "name": "2",
+        "heuristicValue": null,
+        "neighbors": [
+            {
+                "id": "node_1",
+                "cost": null,
+                "linkId": "link_group_node_1_node_2"
+            },
+            {
+                "id": "node_3",
+                "cost": null,
+                "linkId": "link_group_node_3_node_2"
+            },
+            {
+                "id": "node_4",
+                "cost": null,
+                "linkId": "link_group_node_2_node_4"
+            },
+            {
+                "id": "node_5",
+                "cost": null,
+                "linkId": "link_group_node_2_node_5"
+            }
+        ],
+        "position": {
+            "top": 347,
+            "left": 509
+        },
+        "width": 50,
+        "height": 70
+    },
+    {
+        "id": "node_3",
+        "name": "3",
+        "heuristicValue": null,
+        "neighbors": [
+            {
+                "id": "node_0",
+                "cost": null,
+                "linkId": "link_group_node_0_node_3"
+            },
+            {
+                "id": "node_2",
+                "cost": null,
+                "linkId": "link_group_node_3_node_2"
+            },
+            {
+                "id": "node_1",
+                "cost": null,
+                "linkId": "link_group_node_3_node_1"
+            },
+            {
+                "id": "node_4",
+                "cost": null,
+                "linkId": "link_group_node_3_node_4"
+            }
+        ],
+        "position": {
+            "top": 349,
+            "left": 171
+        },
+        "width": 50,
+        "height": 70
+    },
+    {
+        "id": "node_4",
+        "name": "4",
+        "heuristicValue": null,
+        "neighbors": [
+            {
+                "id": "node_2",
+                "cost": null,
+                "linkId": "link_group_node_2_node_4"
+            },
+            {
+                "id": "node_6",
+                "cost": null,
+                "linkId": "link_group_node_4_node_6"
+            },
+            {
+                "id": "node_3",
+                "cost": null,
+                "linkId": "link_group_node_3_node_4"
+            }
+        ],
+        "position": {
+            "top": 488,
+            "left": 325
+        },
+        "width": 50,
+        "height": 70
+    },
+    {
+        "id": "node_5",
+        "name": "5",
+        "heuristicValue": null,
+        "neighbors": [
+            {
+                "id": "node_1",
+                "cost": null,
+                "linkId": "link_group_node_1_node_5"
+            },
+            {
+                "id": "node_2",
+                "cost": null,
+                "linkId": "link_group_node_2_node_5"
+            }
+        ],
+        "position": {
+            "top": 272,
+            "left": 686
+        },
+        "width": 50,
+        "height": 70
+    },
+    {
+        "id": "node_6",
+        "name": "6",
+        "heuristicValue": null,
+        "neighbors": [
+            {
+                "id": "node_1",
+                "cost": null,
+                "linkId": "link_group_node_1_node_6"
+            },
+            {
+                "id": "node_4",
+                "cost": null,
+                "linkId": "link_group_node_4_node_6"
+            }
+        ],
+        "position": {
+            "top": 465,
+            "left": 611
+        },
+        "width": 50,
+        "height": 70
+    }
+]
