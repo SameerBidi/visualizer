@@ -40,7 +40,14 @@
 
 .node-animated > circle {
 	stroke-width: 5;
+}
+
+.node-animated-from > circle {
 	stroke: red;
+}
+
+.node-animated-to > circle {
+	stroke: cyan;
 }
 
 @keyframes knode {
@@ -51,6 +58,16 @@
 	100%{
 		stroke-dashoffset: 0;
 	}
+}
+
+.node-visited {
+	stroke-dasharray: 0;
+	stroke-dashoffset: 0;
+}
+
+.node-visited > circle {
+	stroke-width: 3;
+	stroke: green;
 }
 
 .link-normal > line {

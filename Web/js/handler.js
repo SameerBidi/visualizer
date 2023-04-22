@@ -72,8 +72,49 @@ $(document).ready(function () {
 
 	drawBoardClicks();
 	
-	animateRecursive("node_0", "node_0");
+	animateAlgo("node_4 -> node_2|node_2 -> node_1|node_1 -> node_0|node_0 -> node_3|node_1 -> node_6|node_1 -> node_5");
 });
+
+function animateAlgo(algoText) {
+	algoLines = algoText.trim().split("|");
+
+	animateAlgoRecursive(algoLines, 0, null, null, null, 1500);
+}
+
+function animateAlgoRecursive(algoLines, nextIdx, prevNodeFromEle, prevNodeToEle, prevLinkLine, delay) {
+	setTimeout(function() {
+		let algoLine = algoLines[nextIdx].trim();
+
+		let [nodeFromId, nodeToId] = algoLine.split(" -> ");
+
+		let nodeFrom = graph.find(x => x.id == nodeFromId);
+		let nodeTo = graph.find(x => x.id == nodeToId);
+
+		let nodeFromEle = $("#" + nodeFromId);
+		let nodeToEle = $("#" + nodeToId);
+		let linkLine = $("#" + nodeFrom.neighbors.find(x => x.id == nodeToId).linkId);
+
+		if(prevNodeFromEle) prevNodeFromEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
+		if(prevNodeToEle) prevNodeToEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
+		if(prevLinkLine) prevLinkLine.removeClass("link-animated").addClass("link-normal");
+
+		nodeFromEle.removeClass("node-visited").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-animated").addClass("node-animated-from");
+		nodeToEle.removeClass("node-visited").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-animated").addClass("node-animated-to");
+		linkLine.removeClass("link-normal").addClass("link-animated");
+
+		if(algoLines.length - 1 > nextIdx) animateAlgoRecursive(algoLines, nextIdx + 1, nodeFromEle, nodeToEle, linkLine, delay);
+		else {
+			setTimeout(function() {
+				nodeFromEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
+				nodeToEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
+				linkLine.removeClass("link-animated").addClass("link-normal");
+
+				console.log("end");
+			}, delay);
+		}
+
+	}, delay);
+}
 
 function animateRecursive(currNodeId, prevNodeId, prevLinkId) {
 	setTimeout(function() {
@@ -368,6 +409,26 @@ function updateLinkPos(node1Id, node2Id, linkLine, linkText) {
 	let y1 = node1Pos.top + (node1Height / 2) + 10;
 	let x2 = node2Pos.left + (node2Width / 2);
 	let y2 = node2Pos.top + (node2Height / 2) + 10;
+
+	let dx1 = x2 - x1;
+	let dy1 = y2 - y1;
+	let lineLength1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+	let unitVector1 = {
+	  x: dx1 / lineLength1,
+	  y: dy1 / lineLength1,
+	};
+	x1 = x1 + unitVector1.x * 20;
+	y1 = y1 + unitVector1.y * 20;
+
+	let dx2 = x1 - x2;
+	let dy2 = y1 - y2;
+	let lineLength2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+	let unitVector2 = {
+	  x: dx2 / lineLength2,
+	  y: dy2 / lineLength2,
+	};
+	x2 = x2 + unitVector2.x * 20;
+	y2 = y2 + unitVector2.y * 20;
 
 	let x = ((x1 + x2) / 2) + 20;
 	let y = ((y1 + y2) / 2) - 20;
