@@ -1,0 +1,129 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Graph Visualizer - Visualize</title>
+
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/bootstrap5.1/bootstrap.min.css" />
+
+	<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap5.1/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/visualize.js"></script>
+
+</head>
+
+<body class="bg-dark">
+	<svg id="link_holder" height="100%" width="100%" style="position: absolute; overflow:hidden; z-index: -1;">
+		<g id="link_group" class="d-none">
+			<line class="link link-normal" x1="100" y1="100" x2="200" y2="200" stroke="white" stroke-width="3" />
+			<text x="100" y="100" font-size="1.25em" fill="red" style="font-weight: bold; font-style: itallic;"></text>
+		</g>
+
+	</svg>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-secondary cust-navbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="index.html">Graph Visualizer/Creator</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link"href="generate.html">Generate Graph</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page"  href="visualize.html">Visualize Graph</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid main-panel">
+		<div class="row h-100 p-2">
+			<div class="col-lg-9 col-xl-9 h-100 p-2">
+				<div class="h-100 border rounded">
+					<div class="container-fluid h-100">
+						<div class="row heading-row">
+							<div class="col-12 text-center">
+								<h6 class="text-white p-2">Graph Draw Board</h6>
+							</div>
+							<hr class="bg-light" />
+						</div>
+						<div class="row main-row">
+							<div id="node_holder" class="col-12 draw-board">
+								<svg id="node" width="50" height="70" class="node node-normal d-none">
+									<circle cx="25" cy="45" r="20" stroke="white" stroke-width="3" fill-opacity="0" />
+									<text x="25" y="45" text-anchor="middle" fill="white" dy=".3em">A</text>
+									<text x="40" y="12" text-anchor="middle" fill="white" dy=".3em">6</text>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-xl-3 h-100 p-2">
+				<div class="h-100 border rounded">
+					<div class="container-fluid h-100">
+						<div class="row heading-row">
+							<div class="col-12 text-center">
+								<h6 class="text-white p-2">Visualizing Utilities</h6>
+							</div>
+							<hr class="bg-light" />
+						</div>
+						<div class="row main-row overflow-auto">
+							<div class="col-12">
+
+								<div id="visualize_div" class="row border rounded pt-2 pb-2 mb-3">
+									<div class="col-12">
+										<div class="mb-3">
+											<label for="algo_select" class="form-label text-light">Select Algorithm</label>
+											<select id="algo_select" class="form-select bg-dark text-light">
+												<option value="1">BFS</option>
+												<option value="2">DFS</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="mb-3">
+											<label for="delay_input" class="form-label text-light">Delay</label>
+											<input id="delay_input" type="number" class="form-control bg-dark text-light">
+										</div>
+									</div>
+									<div class="col-12">
+										<button type="button" class="btn btn-primary" onclick="visualize();">Visualize!!!</button>
+									</div>
+								</div>
+
+								<div class="col-12">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="exportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="exportModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exportModalLabel">Exported Graph JSON</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div id="exportText" class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
