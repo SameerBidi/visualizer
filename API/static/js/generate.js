@@ -10,25 +10,25 @@ $(document).ready(function () {
 		addNodeBtn.off("click");
 	});
 
-	addNode("0", null, null, {x: 208, y: 197});
-	addNode("1", null, null, {x: 540, y: 198});
-	addNode("2", null, null, {x: 534, y: 382});
-	addNode("3", null, null, {x: 196, y: 384});
-	addNode("4", null, null, {x: 350, y: 523});
-	addNode("5", null, null, {x: 711, y: 307});
-	addNode("6", null, null, {x: 636, y: 500});
+	// addNode("0", null, null, {x: 208, y: 197});
+	// addNode("1", null, null, {x: 540, y: 198});
+	// addNode("2", null, null, {x: 534, y: 382});
+	// addNode("3", null, null, {x: 196, y: 384});
+	// addNode("4", null, null, {x: 350, y: 523});
+	// addNode("5", null, null, {x: 711, y: 307});
+	// addNode("6", null, null, {x: 636, y: 500});
 
-	link2Nodes("node_0", "node_1", null);
-	link2Nodes("node_0", "node_3", null);
-	link2Nodes("node_1", "node_2", null);
-	link2Nodes("node_3", "node_2", null);
-	link2Nodes("node_3", "node_1", null);
-	link2Nodes("node_1", "node_6", null);
-	link2Nodes("node_2", "node_4", null);
-	link2Nodes("node_4", "node_6", null);
-	link2Nodes("node_1", "node_5", null);
-	link2Nodes("node_2", "node_5", null);
-	link2Nodes("node_3", "node_4", null);
+	// link2Nodes("node_0", "node_1", null);
+	// link2Nodes("node_0", "node_3", null);
+	// link2Nodes("node_1", "node_2", null);
+	// link2Nodes("node_3", "node_2", null);
+	// link2Nodes("node_3", "node_1", null);
+	// link2Nodes("node_1", "node_6", null);
+	// link2Nodes("node_2", "node_4", null);
+	// link2Nodes("node_4", "node_6", null);
+	// link2Nodes("node_1", "node_5", null);
+	// link2Nodes("node_2", "node_5", null);
+	// link2Nodes("node_3", "node_4", null);
 	
 
 	// addNode("A", 6, {x: 300, y: 500});
@@ -55,10 +55,11 @@ $(document).ready(function () {
 });
 
 function drawBoardClicks() {
+	console.log("dsdsd");
 	$(".draw-board").on("dblclick", function (e) {
 		e.preventDefault();
 
-		
+		console.log("clclclc");
 
 		mousePos = getMousePosition(e);
 
@@ -93,7 +94,6 @@ function drawBoardClicks() {
 		});
 
 		addModal.modal("show");
-		addNodeNameInput.focus();
 	});
 
 	$(".draw-board").on("click", function(e) {

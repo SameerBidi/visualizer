@@ -2,6 +2,8 @@ let visualizeUtilDiv, algoSelect, startNodeSelect, goalNodeSelect, delayInput;
 
 let visualizeDiv, graphTableHolder, graphTableDiv;
 
+let pathText;
+
 $(document).ready(function() {
 
     visualizeUtilDiv = $("div#visualize_util_div");
@@ -13,6 +15,8 @@ $(document).ready(function() {
     visualizeDiv = $("div#visualize_div");
     graphTableHolder = visualizeDiv.find("div#graph_table_holder");
     graphTableDiv = graphTableHolder.find("div#graph_table_div");
+
+    pathText = $("#path_text");
 
     let currentGraphJson = localStorage.getItem("graph_to_visualize");
     //localStorage.removeItem("graph_to_visualize");
@@ -62,6 +66,18 @@ function visualize() {
         JSON.stringify({"graph": graph, "algo_id": algo_id, "start_node_id": start_node_id, "goal_node_id": goal_node_id}),
         function(response) {
             if(response.success) {
+                
+                graphTableHolder.find("> div:not(:first)").remove();
+
+                $(".node").each(function() {
+                    let node = $(this);
+                    node.removeClass("node-visited").removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-normal");
+                });
+
+                visualizeUtilDiv.addClass("d-none");
+
+                pathText.addClass("d-none");
+
                 animateGraphRecursive(response.output.split("\n"), 0, null, null, null, delay);
             }
         },
@@ -103,8 +119,6 @@ function animateGraphRecursive(algoLines, nextIdx, prevNodeFromEle, prevNodeToEl
             let graphTable = graphTableHolder.find("table#graph_table_" + table_name);
             let graphTableTbody = graphTable.find("tbody");
 
-            console.log(graphTableTbody.find("tr:not(:first)"));
-
             graphTableTbody.find("tr:not(:first)").remove();
 
             let value_list = values.split(",");
@@ -122,13 +136,13 @@ function animateGraphRecursive(algoLines, nextIdx, prevNodeFromEle, prevNodeToEl
         else if(command_type == "move") {
             let [nodeFromId, nodeToId] = command.split(">");
 
-            console.log(nodeFromId, nodeToId);
-
             let nodeFrom = graph.find(x => x.id == nodeFromId);
             let nodeTo = graph.find(x => x.id == nodeToId);
     
             let nodeFromEle = $("#" + nodeFromId);
+            nodeFromEle.removeClass("node-normal");
             let nodeToEle = $("#" + nodeToId);
+            nodeToEle.removeClass("node-normal");
             let linkLine = $("#" + nodeFrom.neighbors.find(x => x.id == nodeToId).linkId);
 
             nodeFromEle.removeClass("node-visited").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-animated").addClass("node-animated-from");
@@ -144,8 +158,21 @@ function animateGraphRecursive(algoLines, nextIdx, prevNodeFromEle, prevNodeToEl
                     nodeFromEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
                     nodeToEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
                     linkLine.removeClass("link-animated").addClass("link-normal");
+
+                    visualizeUtilDiv.removeClass("d-none");
                 }, delay);
             }
+        }
+        else if(command_type == "path") {
+            visualizeUtilDiv.removeClass("d-none");
+
+            if(command == "") {
+                pathText.html("Path: No Path Found");
+            } else {
+                pathText.html("Path: " + command);
+            }
+
+            pathText.removeClass("d-none");
         }
 
         if(algoLines.length - 1 > nextIdx) animateGraphRecursive(algoLines, nextIdx + 1, prevNodeFromEle, prevNodeToEle, prevLinkLine, delay);

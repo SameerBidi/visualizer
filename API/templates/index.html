@@ -6,8 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Graph Visualizer</title>
 
+	<link rel="stylesheet" href="static/css/style.css" />
 	<link rel="stylesheet" href="static/css/bootstrap5.1/bootstrap.min.css" />
+
+	<script type="text/javascript" src="static/js/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="static/js/bootstrap5.1/bootstrap.min.js"></script>
+	<script type="text/javascript" src="static/js/default-graphs.js"></script>
 
 </head>
 
@@ -19,7 +23,23 @@
 	</nav>
 
 	<div class="container-fluid">
+		<div class="row mt-3">
+			<div class="col-12">
+				<button type="button" class="btn btn-success" onclick="window.location.href = 'generate';">+ New Graph</button>
+			</div>
+		</div>
 
+		<hr class="bg-light" />
+
+		<div class="row">
+			<div class="col-12">
+				<h4 class="text-light">Try on Default Graphs</h4>
+				<hr class="bg-light" />
+			</div>
+			<div id="default_btn_holder" class="col-12">
+				<button type="button" id="default_btn" class="btn btn-primary m-2 d-none">Graph 1</button>
+			</div>
+		</div>
 	</div>
 </body>
 

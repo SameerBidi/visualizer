@@ -17,6 +17,9 @@ class Visualizer:
     def move(self, from_node_id, to_node_id):
         self.output += f"\nmove:{from_node_id}>{to_node_id}"
 
+    def add_path(self, path_list):
+        self.output += f"\npath:{' -> '.join(path_list)}"
+
     def get_output(self):
         
         return self.output.lstrip("\n").strip()
