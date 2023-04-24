@@ -54,96 +54,11 @@ $(document).ready(function () {
 	//animateAlgo("node_4 -> node_2|node_2 -> node_1|node_1 -> node_0|node_0 -> node_3|node_1 -> node_6|node_1 -> node_5");
 });
 
-function animateAlgo(algoText) {
-	algoLines = algoText.trim().split("|");
-
-	animateAlgoRecursive(algoLines, 0, null, null, null, 500);
-}
-
-function animateAlgoRecursive(algoLines, nextIdx, prevNodeFromEle, prevNodeToEle, prevLinkLine, delay) {
-	setTimeout(function() {
-		let algoLine = algoLines[nextIdx].trim();
-
-		let [nodeFromId, nodeToId] = algoLine.split(" -> ");
-
-		let nodeFrom = graph.find(x => x.id == nodeFromId);
-		let nodeTo = graph.find(x => x.id == nodeToId);
-
-		let nodeFromEle = $("#" + nodeFromId);
-		let nodeToEle = $("#" + nodeToId);
-		let linkLine = $("#" + nodeFrom.neighbors.find(x => x.id == nodeToId).linkId);
-
-		if(prevNodeFromEle) prevNodeFromEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
-		if(prevNodeToEle) prevNodeToEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
-		if(prevLinkLine) prevLinkLine.removeClass("link-animated").addClass("link-normal");
-
-		nodeFromEle.removeClass("node-visited").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-animated").addClass("node-animated-from");
-		nodeToEle.removeClass("node-visited").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-animated").addClass("node-animated-to");
-		linkLine.removeClass("link-normal").addClass("link-animated");
-
-		if(algoLines.length - 1 > nextIdx) animateAlgoRecursive(algoLines, nextIdx + 1, nodeFromEle, nodeToEle, linkLine, delay);
-		else {
-			setTimeout(function() {
-				nodeFromEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
-				nodeToEle.removeClass("node-animated").removeClass("node-animated-from").removeClass("node-animated-to").addClass("node-visited");
-				linkLine.removeClass("link-animated").addClass("link-normal");
-
-				console.log("end");
-			}, delay);
-		}
-
-	}, delay);
-}
-
-function animateRecursive(currNodeId, prevNodeId, prevLinkId) {
-	setTimeout(function() {
-		let currNode = graph.find(x => x.id == currNodeId);
-
-		let currNodeEle = $("#" + currNodeId);
-		let prevNodeEle = $("#" + prevNodeId);
-		let prevLinkLine = $("#" + prevLinkId);
-
-		prevNodeEle.removeClass("node-animated").addClass("node-normal");
-		prevLinkLine.removeClass("link-animated").addClass("link-normal");
-
-		currNodeEle.removeClass("node-normal").addClass("node-animated");
-
-		visited.push(currNodeId);
-
-		if(currNode.neighbors.length > 0) {
-			let neighbor = currNode.neighbors.find(x => !visited.includes(x.id));
-
-			let linkLine = $("#" + neighbor.linkId);
-
-			linkLine.removeClass("link-normal").addClass("link-animated");
-
-			animateRecursive(neighbor.id, currNodeId, neighbor.linkId);
-		}
-	}, 1000);
-}
-
-function animate() {
-	let lastNodeEle;
-	graph.forEach(function(node, idx) {
-		setTimeout(function() {
-			nodeEle = $("#" + node.id);
-			lastNodeEle = nodeEle;
-
-			
-
-		}, 1000 * idx);
-	});
-
-	setTimeout(function() {
-		if(lastNodeEle) {
-			lastNodeEle.removeClass("node-animated").addClass("node-normal");
-		}
-	}, 1000 * graph.length);
-}
-
 function drawBoardClicks() {
 	$(".draw-board").on("dblclick", function (e) {
 		e.preventDefault();
+
+		
 
 		mousePos = getMousePosition(e);
 
@@ -178,6 +93,7 @@ function drawBoardClicks() {
 		});
 
 		addModal.modal("show");
+		addNodeNameInput.focus();
 	});
 
 	$(".draw-board").on("click", function(e) {
@@ -185,7 +101,7 @@ function drawBoardClicks() {
 		console.log(getMousePosition(e));
 		updateSelectedNodes();
 	});
-} 
+}
 
 function linkNodes() {
 	if(selectedNodes.length != 2) {
@@ -219,5 +135,5 @@ function visualize() {
 
 	localStorage.setItem("graph_to_visualize", JSON.stringify(graph));
 
-	window.location.href = "visualize.html";
+	window.location.href = "visualize";
 }

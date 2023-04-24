@@ -6,13 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Graph Visualizer - Visualize</title>
 
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/bootstrap5.1/bootstrap.min.css" />
+	<link rel="stylesheet" href="static/css/style.css" />
+	<link rel="stylesheet" href="static/css/bootstrap5.1/bootstrap.min.css" />
 
-	<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap5.1/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
-	<script type="text/javascript" src="js/visualize.js"></script>
+	<script type="text/javascript" src="static/js/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap5.1/bootstrap.min.js"></script>
+	<script type="text/javascript" src="static/js/http_methods.js"></script>
+	<script type="text/javascript" src="static/js/main.js"></script>
+	<script type="text/javascript" src="static/js/visualize.js"></script>
 
 </head>
 
@@ -26,17 +27,7 @@
 	</svg>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-secondary cust-navbar">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="index.html">Graph Visualizer/Creator</a>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link"href="generate.html">Generate Graph</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page"  href="visualize.html">Visualize Graph</a>
-					</li>
-				</ul>
-			</div>
+			<a class="navbar-brand" href="/">Graph Visualizer/Creator</a>
 		</div>
 	</nav>
 
@@ -47,7 +38,7 @@
 					<div class="container-fluid h-100">
 						<div class="row heading-row">
 							<div class="col-12 text-center">
-								<h6 class="text-white p-2">Graph Draw Board</h6>
+								<h6 class="text-white p-2">Graph Board</h6>
 							</div>
 							<hr class="bg-light" />
 						</div>
@@ -75,20 +66,33 @@
 						<div class="row main-row overflow-auto">
 							<div class="col-12">
 
-								<div id="visualize_div" class="row border rounded pt-2 pb-2 mb-3">
+								<div id="visualize_util_div" class="row border rounded pt-2 pb-2 mb-3">
 									<div class="col-12">
 										<div class="mb-3">
-											<label for="algo_select" class="form-label text-light">Select Algorithm</label>
+											<label for="algo_select" class="form-label text-light">Algorithm</label>
 											<select id="algo_select" class="form-select bg-dark text-light">
-												<option value="1">BFS</option>
-												<option value="2">DFS</option>
+												{% for algo in algos %}
+													<option value="{{algo.id}}">{{algo.name}}</option>
+												{% endfor %}
 											</select>
 										</div>
 									</div>
 									<div class="col-12">
 										<div class="mb-3">
-											<label for="delay_input" class="form-label text-light">Delay</label>
-											<input id="delay_input" type="number" class="form-control bg-dark text-light">
+											<label for="start_node_select" class="form-label text-light">Start Node</label>
+											<select id="start_node_select" class="form-select bg-dark text-light"></select>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="mb-3">
+											<label for="goal_node_select" class="form-label text-light">Goal Node</label>
+											<select id="goal_node_select" class="form-select bg-dark text-light"></select>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="mb-3">
+											<label for="delay_input" class="form-label text-light">Delay (ms)</label>
+											<input id="delay_input" type="number" value="1000" class="form-control bg-dark text-light">
 										</div>
 									</div>
 									<div class="col-12">
@@ -98,6 +102,33 @@
 
 								<div class="col-12">
 									
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div id="visualize_div" class="row border rounded pt-2 pb-2 mb-3">
+									<div class="col-12">
+										<h6 class="text-white">Visualizing Graph</h6>
+										<hr class="bg-light" />
+									</div>
+									<div class="col-12">
+										<div id="graph_table_holder" class="row">
+											<div id="graph_table_div" class="col-6 d-none">
+												<table id="graph_table" class="table table-sm table-dark table-striped table-hover table-bordered">
+													<thead>
+														<tr>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="d-none">
+															<td>10</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -10,10 +10,6 @@
 	height: 3.75rem;
 }
 
-.main-row {
-	height: calc(100% - 3.75rem);
-}
-
 .node {
 	position: absolute; 
 	overflow:hidden; 
